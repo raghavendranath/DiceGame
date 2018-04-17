@@ -13,7 +13,7 @@ var scores, roundScore, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 document.querySelector('.dice').style.display = 'none';
 
@@ -34,14 +34,27 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     
     
     //3. Update the round score if the rolled number was not a 1
+    if(dice !== 1){
+        //Add score
+        roundScore += dice;
+        document.querySelector('#current-'+activePlayer).textContent = roundScore;
+    } else {
+        //Next Player
+        activePlayer === 0?activePlayer = 1: activePlayer = 0;
+        roundScore = 0;
+        
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+        
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+        
+        //document.querySelector('.player-0-panel').classList.remove('active);
+        //document.querySelector('.player-1-panel').classList.add('active);
+        
+        
+        //We want to hide the dice before player 2 begins
+        document.querySelector('.dice').style.display = 'none';
+        
+    }
 })
-
-
-
-//document.querySelector('#current-'+activePlayer).textContent = dice;
-//document.querySelector('#current-'+activePlayer).innerHTML = '<em>'+dice+'</em>';
-
-//var x = document.querySelector('#score-0').textContent;
-//console.log(x);
-
-//document.querySelector('.dice').style.display = 'none';
